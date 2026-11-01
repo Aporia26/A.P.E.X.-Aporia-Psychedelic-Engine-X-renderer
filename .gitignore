@@ -1,3 +1,76 @@
+# ==========================================
+# A.P.E.X. Engine Core Gitignore Configuration
+# Target Stack: C++, CMake, OpenGL, ImGui
+# ==========================================
+
+# --- Compilers & Build Outputs ---
+*.o
+*.obj
+*.elf
+*.ilk
+*.pdb
+*.exp
+*.lib
+*.a
+*.la
+*.lo
+*.dll
+*.so
+*.so.*
+*.dylib
+*.exe
+*.out
+*.app
+
+# --- CMake Build Artifacts ---
+/build/
+/build-*/
+/out/
+/bin/
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile
+install_manifest.txt
+compile_commands.json
+
+# --- Integrated Development Environments (IDEs) ---
+# VS Code
+.vscode/
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+# Visual Studio
+.vs/
+*.user
+*.suo
+*.sln
+*.vcxproj
+*.filters
+# CLion / JetBrains
+.idea/
+cmake-build-*/
+
+# --- Operating System Junk ---
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# --- Large Binary Asset Pipelines (Blender & Audio) ---
+# Exclude raw working files; you will export out runtime-friendly files (.gltf/.glb/.wav) to your assets folder
+*.blend
+*.blend1
+*.blend2
+*.fbx
+*.obj (if used as raw source)
+*.psd
+*.wav (if they are giant raw master files; keep compressed/runtime audio tracked if needed)
+
+# --- Dependency Managers ---
+.vcpkg/
+vcpkg_installed/
+.conan/
+
 # Prerequisites
 *.d
 
