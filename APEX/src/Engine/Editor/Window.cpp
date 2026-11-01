@@ -21,16 +21,37 @@ namespace Apex {
             }
 
             //create context
-            glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
-            glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 5);
-            glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+          // STRATEGY 1: Try your desired standard OpenGL 3.3 Core Profile
+    std::cout << "APEX WINDOW: Attempting to bind OpenGL 3.3 Core Profile...\n";
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+    glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE); // Required for many modern laptop drivers
 
-            if (!m_Window) 
-            {
-            std::cerr << "CRITICAL: Native OS window binding failure.\n";
-            glfwTerminate();
-            return false;
-            }
+    m_Window = glfwCreateWindow(m_width, m_height, m_name.c_str(), nullptr, nullptr);
+
+    // STRATEGY 2: If Core Profile returns NULL, switch to a Safe-Mode Fallback Loop
+    if (!m_Window) {
+        std::cout << "APEX WINDOW [Warning]: Strict Core Profile rejected by driver.\n";
+        std::cout << "APEX WINDOW: Triggering safe compatibility fallback handshake...\n";
+        
+        // Reset all constraints completely back to absolute basics
+        glfwDefaultWindowHints(); 
+        
+        // Let the driver choose its highest available backwards-compatible window channel
+        glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+        glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+        glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_ANY_PROFILE); 
+
+        m_Window = glfwCreateWindow(m_width, m_height, m_name.c_str(), nullptr, nullptr);
+    }
+
+    // STRATEGY 3: Complete Hardware Failure Safety Net
+    if (!m_Window) {
+        std::cerr << "CRITICAL ERROR: Native OS window binding failed across all profiles.\n";
+        glfwTerminate();
+        return false;
+    }
 
             glfwMakeContextCurrent(m_Window);
 
