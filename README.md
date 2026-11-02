@@ -14,6 +14,11 @@ I Added my Windows and Inputs for the editor using OpenGL 3.3 and for the Editor
 
 * *Here is the Output:*
   <img src="./screenshots/ui_preview.png" width="600" height="500" alt="Engine SneakPeek">
-  ![Engine](./screenshots/editor.gif)
+  
 
+### On 2/11/26
+* #### *Added The Scene Viewport!*
 
+I Replaced my Viewport placeholder of my Editor UI with an actual 3D space and a Viewport Camera to navigate and The Coordinate space. I had to Use a FrameBuffer to Project it into the 2d texture of OpenGL. It still needs Gizmo and stuff...
+* *Here is the Output:*
+   ![Engine Viewport](./screenshots/editor.gif)
