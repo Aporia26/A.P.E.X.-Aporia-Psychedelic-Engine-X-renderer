@@ -7,18 +7,20 @@ The Engine is Not Complete In Process...
 ## **DevLog Diaries**
 
 
-### On 1/11/26
-* #### *Got My Editor UI Running!*
-
-I Added my Windows and Inputs for the editor using OpenGL 3.3 and for the Editor's UI Used the imgui - docking. Also Made the Engine monolithic by adding a EngineStateManager to toggle between Editor Mode and Gameplay Mode using Enums.
-
-* *Here is the Output:*
-  <img src="./screenshots/ui_preview.png" width="600" height="500" alt="Engine SneakPeek">
-  
-
 ### On 2/11/26
 * #### *Added The Scene Viewport!*
 
 I Replaced my Viewport placeholder of my Editor UI with an actual 3D space and a Viewport Camera to navigate and The Coordinate space. I had to Use a FrameBuffer to Project it into the 2d texture of OpenGL. It still needs Gizmo and stuff...
 * *Here is the Output:*
    ![Engine Viewport](./screenshots/editor.gif)
+
+
+### On 1/11/26
+* #### *Got My Editor UI Running!*
+
+I Added my Windows and Inputs for the editor using OpenGL 3.3 and for the Editor's UI Used the imgui - docking. Also Made the Engine monolithic by adding a EngineStateManager to toggle between Editor Mode and Gameplay Mode using Enums.
+* *Here is the Output:*
+  <img src="./screenshots/ui_preview.png" width="600" height="500" alt="Engine SneakPeek">
+  
+
+
