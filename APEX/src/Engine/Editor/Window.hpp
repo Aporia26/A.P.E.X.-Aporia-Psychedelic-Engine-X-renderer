@@ -12,6 +12,10 @@ namespace Apex {
 
        //High level wrapper for opengl
 
+       //getters for window dimension added for viewport of editor
+       int GetWindowWidth() const { return m_width; }
+       int GetWindowHeight() const { return m_height; }
+
        //Window Creation
        bool CreateWindow(int width, int height, const std::string& name);
        void Update();
@@ -33,6 +37,7 @@ namespace Apex {
        int m_width = 0;
        int m_height = 0;
 
+       
        GLFWwindow* m_Window = nullptr;
 
     };

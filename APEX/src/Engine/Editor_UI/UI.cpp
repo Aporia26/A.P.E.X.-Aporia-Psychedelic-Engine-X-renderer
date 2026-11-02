@@ -27,7 +27,7 @@ namespace Apex {
         ImGui_ImplOpenGL3_Init("#version 450");
     }
 
-    void EditorUI::Render() {
+    void EditorUI::Render(ViewportCamera& camera, uint32_t sceneTextureID, GLFWwindow* window) {
         ImGui_ImplOpenGL3_NewFrame();
         ImGui_ImplGlfw_NewFrame();
         ImGui::NewFrame();
@@ -78,7 +78,8 @@ namespace Apex {
         RenderLeftHierarchy();
         RenderBottomAssetShelf();
         RenderRightInspector();
-        RenderCenterViewport();
+        //RenderCenterViewport();
+        ViewportPanel::Render(camera, sceneTextureID, window); //our new viewport
 
         // 4. Final Frame Assembly Rendering Calculations
         ImGui::Render();
@@ -177,6 +178,12 @@ namespace Apex {
         ImGui::End();
     }
 
+    
+    /*
+    // ###########################################################
+    // Replaced This Placeholder By the new actual Viewport...
+    // ###########################################################
+
     void EditorUI::RenderCenterViewport() {
         ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(0.0f, 0.0f));
         ImGui::Begin("Level Viewport");
@@ -188,7 +195,7 @@ namespace Apex {
         ImGui::End();
         ImGui::PopStyleVar();
     }
-
+*/
     void EditorUI::ApplyPsychedelicTheme() {
         // We configure a high-contrast, deeply moody palette matching Wong Kar-wai color styles
        
@@ -216,8 +223,20 @@ namespace Apex {
 
     void EditorUI::Shutdown() 
     { 
-        ImGui_ImplOpenGL3_Shutdown(); 
-        ImGui_ImplGlfw_Shutdown(); 
-        ImGui::DestroyContext(); 
+        // Ensure the ImGui main core context exists before invoking driver sweeps
+        if (ImGui::GetCurrentContext() != nullptr) {
+            
+            // Check if the renderer backend data is still active before clearing
+            if (ImGui::GetIO().BackendRendererUserData != nullptr) {
+                ImGui_ImplOpenGL3_Shutdown(); 
+            }
+            
+            // Check if the platform window backend context is still active before clearing
+            if (ImGui::GetIO().BackendPlatformUserData != nullptr) {
+                ImGui_ImplGlfw_Shutdown(); 
+            }
+            
+            ImGui::DestroyContext(); 
+        }
     }
 }

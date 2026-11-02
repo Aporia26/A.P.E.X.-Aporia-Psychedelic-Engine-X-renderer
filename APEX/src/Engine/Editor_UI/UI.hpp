@@ -1,5 +1,6 @@
 #pragma once
 #include <GLFW/glfw3.h>
+#include "ViewportPanel.hpp"
 
 namespace Apex {
 
@@ -10,7 +11,7 @@ namespace Apex {
         ~EditorUI();
 
         void Initialize(GLFWwindow* window);
-        void Render();
+        void Render(ViewportCamera& camera, uint32_t sceneTextureID, GLFWwindow* window);
         void Shutdown();
 
     private:
